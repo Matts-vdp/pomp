@@ -5,43 +5,19 @@ namespace PompServer.Test;
 [TestFixture]
 public class PompTest
 {
+
     [SetUp]
     public void Setup()
     {
+        
     }
-
-    [Test]
-    public void CommandShouldExecuteTest()
-    {
-        var id = 1;
-        var value = true;
-        var command = new Command(id, value);
-        var result = command.ShouldExecute();
-        Assert.AreEqual(true, result);
-    }
-
-    [TestCase(false)]
     [TestCase(true)]
-    public void CommandExecuteTest(bool value)
+    [TestCase(false)]
+    public void StateTest(bool value)
     {
-        var id = 1;
-        var command = new Command(id, value);
-        var result = command.Execute();
-        Assert.AreEqual(value, result);
+        var pomp = new Pomp();
+        pomp.setState(value);
+        Assert.AreEqual(value, pomp.getState());
     }
 
-    [Test]
-    public void CommandIsDoneTest()
-    {
-        var id = 1;
-        var value = true;
-        var command = new Command(id, value);
-
-        var resultBefore = command.IsDone();
-        command.Execute();
-        var resultAfter = command.IsDone();
-
-        Assert.AreEqual(false, resultBefore);
-        Assert.AreEqual(true, resultAfter);
-    }
 }

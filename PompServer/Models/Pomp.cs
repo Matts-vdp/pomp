@@ -1,7 +1,20 @@
 namespace PompServer.Models;
-public class Pomp
-{
-    public bool Status = false;
-    public List<Command> Commands = new();
 
+public interface IPomp
+{
+    void setState(bool value);
+}
+
+public class Pomp : IPomp
+{
+    private bool Status = false;
+
+    public void setState(bool value)
+    {
+        Status = value;
+    }
+    public bool getState()
+    {
+        return Status;
+    }
 }
