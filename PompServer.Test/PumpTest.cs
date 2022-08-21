@@ -3,7 +3,7 @@ using PompServer.Models;
 namespace PompServer.Test;
 
 [TestFixture]
-public class PompTest
+public class PumpTest
 {
 
     [SetUp]
@@ -15,9 +15,9 @@ public class PompTest
     [TestCase(false)]
     public void StateTest(bool value)
     {
-        var pomp = new Pomp();
-        pomp.setState(value);
-        Assert.AreEqual(value, pomp.getState());
+        var pump = new Pump();
+        pump.setState(value);
+        Assert.AreEqual(value, pump.getState());
     }
 
 }

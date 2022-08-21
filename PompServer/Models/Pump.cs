@@ -5,7 +5,7 @@ public interface IPomp
     void setState(bool value);
 }
 
-public class Pomp : IPomp
+public class Pump : IPomp
 {
     private bool Status = false;
 
