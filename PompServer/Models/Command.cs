@@ -1,12 +1,12 @@
 namespace PompServer.Models;
 
-public class Command 
+public class Command
 {
     public int Id;
     public bool Action;
-    private bool done;
+    protected bool done;
 
-    public Command(int id, bool action) 
+    public Command(int id, bool action)
     {
         Id = id;
         Action = action;
@@ -16,7 +16,7 @@ public class Command
         done = true;
         return Action;
     }
-    public virtual bool ShouldExecute()
+    public virtual bool ShouldExecute(DateTime time)
     {
         return true;
     }

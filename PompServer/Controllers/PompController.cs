@@ -14,7 +14,8 @@ public class PompController : ControllerBase
     }
 
     [HttpGet(Name = "GetPomp")]
-    public string Index() {
+    public string Index()
+    {
         return "Hallo";
     }
 }
