@@ -2,18 +2,19 @@ namespace PompServer.Models;
 
 public interface IPump
 {
-    void setState(bool value);
+    void SetState(bool value);
+    bool GetState();
 }
 
 public class Pump : IPump
 {
     private bool Status = false;
 
-    public void setState(bool value)
+    public void SetState(bool value)
     {
         Status = value;
     }
-    public bool getState()
+    public bool GetState()
     {
         return Status;
     }

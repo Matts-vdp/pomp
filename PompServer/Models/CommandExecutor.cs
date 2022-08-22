@@ -1,14 +1,20 @@
+using Microsoft.AspNetCore.Components.Server.Circuits;
+using System;
+
 namespace PompServer.Models;
 
 public class CommandExecutor
 {
     private List<Command> commands;
     private IPump pump;
+    private ILogger logger;
+    private Task task;
 
-    public CommandExecutor(IPump pump)
+    public CommandExecutor(IPump pump, ILogger logger)
     {
         commands = new List<Command>();
         this.pump = pump;
+        this.logger = logger;
     }
 
     public void Run(DateTime time)
@@ -20,8 +26,9 @@ public class CommandExecutor
             {
                 if (command.ShouldExecute(time))
                 {
+                    logger.LogInformation(command.ToString());
                     var action = command.Execute();
-                    pump.setState(action);
+                    pump.SetState(action);
                     if (command.IsDone())
                         finished = command;
                     break;
@@ -42,7 +49,12 @@ public class CommandExecutor
         }
     }
 
-    public void Add(Command command) 
+    public void AddCommand(Command command)
+    {
+        Add(command);
+        
+    }
+    private void Add(Command command) 
     { 
         lock (commands)
         {
@@ -68,5 +80,28 @@ public class CommandExecutor
         {
             commands.Clear();
         }
+    }
+
+    public void ExecutingLoop()
+    {
+        while (!IsDone())
+        {
+            Run(DateTime.Now);
+            Thread.Sleep(200);
+        }
+    }
+
+    public bool IsDone()
+    {
+        lock (commands)
+        {
+            return commands.Count == 0;
+        }
+    }
+
+    public Task StartTask()
+    {
+        task = Task.Run(() =>{ ExecutingLoop(); });
+        return task;
     }
 }

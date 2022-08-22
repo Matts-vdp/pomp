@@ -16,8 +16,8 @@ public class PumpTest
     public void StateTest(bool value)
     {
         var pump = new Pump();
-        pump.setState(value);
-        Assert.AreEqual(value, pump.getState());
+        pump.SetState(value);
+        Assert.AreEqual(value, pump.GetState());
     }
 
 }

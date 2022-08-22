@@ -24,4 +24,8 @@ public class Command
     {
         return done;
     }
+    public override string ToString()
+    {
+        return $"id:{Id} action:{Action}";
+    }
 }
