@@ -2,9 +2,9 @@ namespace PompServer.Models;
 
 public class Command
 {
-    public int Id;
-    public bool Action;
-    protected bool done;
+    public int Id { get; set; }
+    public bool Action { get; set; }
+    protected bool done { get; set; }
 
     public Command(int id, bool action)
     {

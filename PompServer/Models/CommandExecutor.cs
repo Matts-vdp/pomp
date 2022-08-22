@@ -52,8 +52,8 @@ public class CommandExecutor
     public void AddCommand(Command command)
     {
         Add(command);
-        if (task == null || task.IsCompleted)
-            task = StartTask();
+        //if (task == null || task.IsCompleted)
+        //    task = StartTask();
     }
     private void Add(Command command) 
     { 
