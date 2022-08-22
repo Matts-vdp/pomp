@@ -8,7 +8,7 @@ public class CommandExecutor
     private List<Command> commands;
     private IPump pump;
     private ILogger logger;
-    private Task task;
+    private Task? task;
 
     public CommandExecutor(IPump pump, ILogger logger)
     {
@@ -52,7 +52,8 @@ public class CommandExecutor
     public void AddCommand(Command command)
     {
         Add(command);
-        
+        if (task == null || task.IsCompleted)
+            task = StartTask();
     }
     private void Add(Command command) 
     { 
@@ -101,7 +102,7 @@ public class CommandExecutor
 
     public Task StartTask()
     {
-        task = Task.Run(() =>{ ExecutingLoop(); });
+        var task = Task.Run(() =>{ ExecutingLoop(); });
         return task;
     }
 }
