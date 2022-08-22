@@ -21,6 +21,7 @@ public class CommandExecutorTest
 
 
     [TestCase(1)]
+    [TestCase(2)]
     public void AddTest(int id)
     {
         var command = new Command(id, true);
@@ -31,4 +32,18 @@ public class CommandExecutorTest
         Assert.AreEqual(command, commandReturn);
     }
 
+    [Test]
+    public void RunTest()
+    {
+        var id = 1;
+        var value = true;
+        var command = new Command(id, value);
+        
+        commandExecutor.Add(command);
+        commandExecutor.Run(DateTime.Now);
+
+        Assert.AreEqual(value, pump.getState());
+        Assert.AreEqual(0, commandExecutor.GetCommands().Count);
+        Assert.AreEqual(null, commandExecutor.GetCommand(id));
+    }
 }

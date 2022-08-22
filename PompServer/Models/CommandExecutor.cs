@@ -13,35 +13,60 @@ public class CommandExecutor
 
     public void Run(DateTime time)
     {
-        Command? finished = null;
-        foreach (var command in commands)
+        lock (commands)
         {
-            if (command.ShouldExecute(time))
+            Command? finished = null;
+            foreach (var command in commands)
             {
-                var action = command.Execute();
-                pump.setState(action);
-                if (command.IsDone())
-                    finished = command;
-                break;
+                if (command.ShouldExecute(time))
+                {
+                    var action = command.Execute();
+                    pump.setState(action);
+                    if (command.IsDone())
+                        finished = command;
+                    break;
+                }
             }
+            if (finished != null)
+                commands.Remove(finished);
         }
-        if (finished != null)
-            commands.Remove(finished);
     }
 
     public void Delete(int id)
     {
-        var command = commands.Where((c) => c.Id == id).First();
-        commands.Remove(command);
+        lock (commands)
+        {
+            var command = GetCommand(id);
+            if (command != null)
+                commands.Remove(command);
+        }
     }
 
-    public void Add(Command command) { commands.Add(command); }
+    public void Add(Command command) 
+    { 
+        lock (commands)
+        {
+            commands.Add(command); 
+        }
+    }
 
-    public Command GetCommand(int id)
+    public Command? GetCommand(int id)
     {
-        return commands.Where((c) => c.Id == id).First();
+        lock (commands)
+        {
+            if (commands.Count != 0)
+                return commands.Where((c) => c.Id == id).First();
+            return null;
+        }
     }
 
     public List<Command> GetCommands() { return commands; }
 
+    public void Clear()
+    {
+        lock(commands)
+        {
+            commands.Clear();
+        }
+    }
 }

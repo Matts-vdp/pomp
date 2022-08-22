@@ -21,8 +21,11 @@ namespace PompServer.Test
             var command = new RepeatedCommand(id, offTime, onTime, amount);
 
             var result = command.ShouldExecute(DateTime.Now);
+            command.Execute();
+            var result2 = command.ShouldExecute(DateTime.Now);
 
             Assert.AreEqual(true, result);
+            Assert.AreEqual(false, result2);
         }
 
         [Test]
