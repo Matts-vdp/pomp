@@ -1,11 +1,11 @@
 namespace PompServer.Models;
 
-public interface IPomp
+public interface IPump
 {
     void setState(bool value);
 }
 
-public class Pump : IPomp
+public class Pump : IPump
 {
     private bool Status = false;
 
