@@ -40,7 +40,7 @@ public class CommandExecutor
         }
     }
 
-    public void Delete(int id)
+    public void Delete(Guid id)
     {
         lock (commands)
         {
@@ -64,7 +64,7 @@ public class CommandExecutor
         }
     }
 
-    public RepeatedCommand? GetCommand(int id)
+    public RepeatedCommand? GetCommand(Guid id)
     {
         lock (commands)
         {

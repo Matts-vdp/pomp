@@ -20,7 +20,7 @@ public class PompController : ControllerBase
         this.pumpService = pumpService;
     }
 
-    [HttpGet(Name = "GetPomp")]
+    [HttpGet("")]
     public string Index()
     {
         return "Hallo";
@@ -35,7 +35,7 @@ public class PompController : ControllerBase
     [HttpPost("Commands")]
     public IActionResult AddCommand(bool action)
     {
-        var command = new BasicCommand(0, action);
+        var command = new BasicCommand(action);
         _logger.LogInformation("Created: " + command.ToString());
         pumpService.AddCommand(command);
         return Ok();
@@ -45,7 +45,6 @@ public class PompController : ControllerBase
     public IActionResult AddRepeatedCommand(int offTime, int onTime, int amount)
     {
         var command = new RepeatedCommand(
-            0, 
             true,
             offTime,
             onTime, 

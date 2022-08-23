@@ -2,7 +2,7 @@ namespace PompServer.Models;
 
 public class RepeatedCommand
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public bool Action { get; set; }
 
     protected bool done = false;
@@ -12,22 +12,20 @@ public class RepeatedCommand
     public DateTime NextTime { get; set; } = DateTime.MinValue;
 
     public RepeatedCommand(
-        int id,
         int amount = 1,
         int offTime = 0,
         int onTime = 0
-        ) : this(id, true, amount, offTime, onTime) { }
+        ) : this(true, amount, offTime, onTime) { }
 
 
     public RepeatedCommand(
-        int id,
         bool action = true,
         int amount = 1,
         int offTime = 0,
         int onTime = 0
         )
     {
-        Id = id;
+        Id = Guid.NewGuid();
         Action = action;
         Amount = amount;
         OffTime = offTime;

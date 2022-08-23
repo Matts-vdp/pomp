@@ -2,7 +2,7 @@ namespace PompServer.Models;
 
 public class BasicCommand: RepeatedCommand
 {
-    public BasicCommand(int id, bool action) : base(id, action){}
+    public BasicCommand(bool action) : base(action){}
     
     public override bool Execute()
     {

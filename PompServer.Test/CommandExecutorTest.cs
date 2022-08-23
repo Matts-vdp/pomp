@@ -27,11 +27,11 @@ public class CommandExecutorTest
     }
 
 
-    [TestCase(1)]
-    [TestCase(2)]
-    public void AddTest(int id)
+    [Test]
+    public void AddTest()
     {
-        var command = new BasicCommand(id, true);
+        var command = new BasicCommand(true);
+        var id = command.Id;
 
         commandExecutor.Add(command);
         var commandReturn = commandExecutor.GetCommand(id);
@@ -42,10 +42,10 @@ public class CommandExecutorTest
     [Test]
     public void RunTest()
     {
-        var id = 1;
         var value = true;
-        var command = new BasicCommand(id, value);
-        
+        var command = new BasicCommand(value);
+        var id = command.Id;
+
         commandExecutor.Add(command);
         commandExecutor.Run(DateTime.Now);
 
@@ -56,9 +56,9 @@ public class CommandExecutorTest
     [Test]
     public void IsDoneTest()
     {
-        var id = 1;
         var value = true;
-        var command = new BasicCommand(id, value);
+        var command = new BasicCommand(value);
+        var id = command.Id;
         commandExecutor.Add(command);
 
         var result = commandExecutor.IsDone();
@@ -76,9 +76,8 @@ public class CommandExecutorTest
     {
         for(int i = 0; i < number; i++)
         {
-            var id = i;
             var value = true;
-            var command = new BasicCommand(id, value);
+            var command = new BasicCommand(value);
             commandExecutor.Add(command);
         }
         
@@ -90,9 +89,8 @@ public class CommandExecutorTest
     [Test]
     public void StartTaskTest()
     {
-        var id = 1;
         var value = true;
-        var command = new BasicCommand(id, value);
+        var command = new BasicCommand(value);
         commandExecutor.Add(command);
 
         var task = commandExecutor.StartTask();
