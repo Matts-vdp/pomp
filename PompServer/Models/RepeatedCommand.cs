@@ -1,44 +1,70 @@
 namespace PompServer.Models;
 
-public class RepeatedCommand : Command
+public class RepeatedCommand
 {
-    private int amount;
-    private TimeSpan offTime;
-    private TimeSpan onTime;
-    private DateTime nextTime;
+    public int Id { get; set; }
+    public bool Action { get; set; }
+
+    protected bool done = false;
+    public int Amount { get; set; }
+    public int OffTime { get; set; }
+    public int OnTime { get; set; }
+    public DateTime NextTime { get; set; } = DateTime.MinValue;
 
     public RepeatedCommand(
         int id,
-        TimeSpan offTime,
-        TimeSpan onTime,
-        int amount
-        ) : base(id, true)
+        int amount = 1,
+        int offTime = 0,
+        int onTime = 0
+        ) : this(id, true, amount, offTime, onTime) { }
+
+
+    public RepeatedCommand(
+        int id,
+        bool action = true,
+        int amount = 1,
+        int offTime = 0,
+        int onTime = 0
+        )
     {
-        this.amount = amount;
-        this.offTime = offTime;
-        this.onTime = onTime;
-        this.nextTime = DateTime.Now;
+        Id = id;
+        Action = action;
+        Amount = amount;
+        OffTime = offTime;
+        OnTime = onTime;
+        NextTime = DateTime.Now;
     }
 
-    public override bool ShouldExecute(DateTime time)
+    public virtual bool ShouldExecute(DateTime time)
     {
-        return nextTime <= time;
+        return NextTime <= time;
     }
-    public override bool Execute()
+    public virtual bool Execute()
     {
         if (Action) // als eerste keer 
         {
-            nextTime += onTime;
+            NextTime += TimeSpan.FromSeconds(OnTime);
             Action = false;
             return true;
         }
         else
         {
-            nextTime += offTime;
+            NextTime += TimeSpan.FromSeconds(OffTime);
             Action = true;
-            amount--;
-            if (amount == 0) done = true;
+            Amount--;
+            if (Amount == 0) done = true;
             return false;
         }
+    }
+
+    public bool IsDone()
+    {
+        return done;
+    }
+
+
+    public override string ToString()
+    {
+        return $"id:{Id} action:{Action} amount:{Amount}";
     }
 }

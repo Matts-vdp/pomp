@@ -15,10 +15,10 @@ namespace PompServer.Test
         public void RepeatedCommandShouldExecuteTest()
         {
             var id = 1;
-            var offTime = TimeSpan.FromMinutes(1);
-            var onTime = TimeSpan.FromMinutes(1);
+            var offTime = 1;
+            var onTime = 1;
             var amount = 1;
-            var command = new RepeatedCommand(id, offTime, onTime, amount);
+            var command = new RepeatedCommand(id, amount, offTime, onTime);
 
             var result = command.ShouldExecute(DateTime.Now);
             command.Execute();
@@ -32,11 +32,11 @@ namespace PompServer.Test
         public void RepeatedCommandExecuteOnceTest()
         {
             var id = 1;
-            var offTime = TimeSpan.FromMinutes(1);
-            var onTime = TimeSpan.FromMinutes(1);
+            var offTime = 1;
+            var onTime = 1;
             var amount = 1;
 
-            var command = new RepeatedCommand(id, offTime, onTime, amount);
+            var command = new RepeatedCommand(id, amount, offTime, onTime);
 
             var result = command.Execute();
             Assert.AreEqual(true, result);
@@ -51,11 +51,11 @@ namespace PompServer.Test
         public void RepeatedCommandExecuteMoreTest()
         {
             var id = 1;
-            var offTime = TimeSpan.FromMinutes(1);
-            var onTime = TimeSpan.FromMinutes(1);
+            var offTime = 1;
+            var onTime = 1;
             var amount = 2;
 
-            var command = new RepeatedCommand(id, offTime, onTime, amount);
+            var command = new RepeatedCommand(id, amount, offTime, onTime);
 
             var result = command.Execute();
             Assert.AreEqual(true, result);

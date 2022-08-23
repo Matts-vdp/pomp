@@ -16,7 +16,7 @@ namespace PompServer.Test
         {
             var id = 1;
             var value = true;
-            var command = new Command(id, value);
+            var command = new BasicCommand(id, value);
             var result = command.ShouldExecute(DateTime.Now);
             Assert.AreEqual(true, result);
         }
@@ -26,7 +26,7 @@ namespace PompServer.Test
         public void CommandExecuteTest(bool value)
         {
             var id = 1;
-            var command = new Command(id, value);
+            var command = new BasicCommand(id, value);
             var result = command.Execute();
             Assert.AreEqual(value, result);
         }
@@ -36,7 +36,7 @@ namespace PompServer.Test
         {
             var id = 1;
             var value = true;
-            var command = new Command(id, value);
+            var command = new BasicCommand(id, value);
 
             var resultBefore = command.IsDone();
             command.Execute();

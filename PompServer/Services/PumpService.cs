@@ -11,12 +11,12 @@ public class PumpService
 		commandExecutor = new CommandExecutor(new Pump(), logger);
 	}
 
-	public List<Command> GetCommands()
+	public List<RepeatedCommand> GetCommands()
 	{
 		return commandExecutor.GetCommands();
 	}
 
-	public void AddCommand(Command command)
+	public void AddCommand(RepeatedCommand command)
 	{
 		commandExecutor.AddCommand(command);
 	}

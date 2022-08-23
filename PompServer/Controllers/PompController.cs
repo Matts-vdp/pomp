@@ -27,7 +27,7 @@ public class PompController : ControllerBase
     }
 
     [HttpGet("Commands")]
-    public List<Command> Commands()
+    public List<RepeatedCommand> Commands()
     {
         return pumpService.GetCommands();
     }
@@ -35,7 +35,7 @@ public class PompController : ControllerBase
     [HttpPost("Commands")]
     public IActionResult AddCommand(bool action)
     {
-        var command = new Command(0, action);
+        var command = new BasicCommand(0, action);
         _logger.LogInformation("Created: " + command.ToString());
         pumpService.AddCommand(command);
         return Ok();
@@ -46,8 +46,9 @@ public class PompController : ControllerBase
     {
         var command = new RepeatedCommand(
             0, 
-            TimeSpan.FromSeconds(offTime),
-            TimeSpan.FromSeconds(onTime), 
+            true,
+            offTime,
+            onTime, 
             amount
             );
         _logger.LogInformation("Created: " + command.ToString());

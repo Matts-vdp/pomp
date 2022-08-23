@@ -31,7 +31,7 @@ public class CommandExecutorTest
     [TestCase(2)]
     public void AddTest(int id)
     {
-        var command = new Command(id, true);
+        var command = new BasicCommand(id, true);
 
         commandExecutor.Add(command);
         var commandReturn = commandExecutor.GetCommand(id);
@@ -44,7 +44,7 @@ public class CommandExecutorTest
     {
         var id = 1;
         var value = true;
-        var command = new Command(id, value);
+        var command = new BasicCommand(id, value);
         
         commandExecutor.Add(command);
         commandExecutor.Run(DateTime.Now);
@@ -58,7 +58,7 @@ public class CommandExecutorTest
     {
         var id = 1;
         var value = true;
-        var command = new Command(id, value);
+        var command = new BasicCommand(id, value);
         commandExecutor.Add(command);
 
         var result = commandExecutor.IsDone();
@@ -78,7 +78,7 @@ public class CommandExecutorTest
         {
             var id = i;
             var value = true;
-            var command = new Command(id, value);
+            var command = new BasicCommand(id, value);
             commandExecutor.Add(command);
         }
         
@@ -92,7 +92,7 @@ public class CommandExecutorTest
     {
         var id = 1;
         var value = true;
-        var command = new Command(id, value);
+        var command = new BasicCommand(id, value);
         commandExecutor.Add(command);
 
         var task = commandExecutor.StartTask();
