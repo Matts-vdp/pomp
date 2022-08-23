@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components.Server.Circuits;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
 namespace PompServer.Models;
@@ -6,6 +7,7 @@ namespace PompServer.Models;
 public class CommandExecutor
 {
     private List<Command> commands;
+    private List<RepeatedCommand> repeatedCommands;
     private IPump pump;
     private ILogger logger;
     private Task? task;
@@ -13,11 +15,12 @@ public class CommandExecutor
     public CommandExecutor(IPump pump, ILogger logger)
     {
         commands = new List<Command>();
+        repeatedCommands = new List<RepeatedCommand>();
         this.pump = pump;
         this.logger = logger;
     }
 
-    public void Run(DateTime time)
+    public void Execute(DateTime time, List<Command> commands)
     {
         lock (commands)
         {
@@ -39,6 +42,12 @@ public class CommandExecutor
         }
     }
 
+    public void Run(DateTime time)
+    {
+        Execute(time, commands);
+        Execute(time, repeatedCommands.Cast<Command>().ToList());
+    }
+
     public void Delete(int id)
     {
         lock (commands)
@@ -52,10 +61,10 @@ public class CommandExecutor
     public void AddCommand(Command command)
     {
         Add(command);
-        //if (task == null || task.IsCompleted)
-        //    task = StartTask();
+        if (task == null || task.IsCompleted)
+            task = StartTask();
     }
-    private void Add(Command command) 
+    public void Add(Command command) 
     { 
         lock (commands)
         {

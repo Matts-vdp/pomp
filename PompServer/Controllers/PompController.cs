@@ -40,4 +40,18 @@ public class PompController : ControllerBase
         pumpService.AddCommand(command);
         return Ok();
     }
+
+    [HttpPost("RepeatedCommand")]
+    public IActionResult AddRepeatedCommand(int offTime, int onTime, int amount)
+    {
+        var command = new RepeatedCommand(
+            0, 
+            TimeSpan.FromSeconds(offTime),
+            TimeSpan.FromSeconds(onTime), 
+            amount
+            );
+        _logger.LogInformation("Created: " + command.ToString());
+        pumpService.AddCommand(command);
+        return Ok();
+    }
 }
