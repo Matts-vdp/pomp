@@ -13,6 +13,7 @@ public class Pump : IPump
     public void SetState(bool value)
     {
         Status.Active = value;
+        Status.LastUsed = DateTime.Now;
     }
     public Status GetStatus()
     {
