@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import List from './Information/Information';
-import Creator from './Creator';
+import Creator from './Creator/Creator';
 
 function NavBar() {
   return (

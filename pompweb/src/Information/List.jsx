@@ -1,4 +1,4 @@
-import dateInfo from "./DateInfo";
+import {dateInfo, timeFormat} from "./Util";
 import { useEffect, useState } from "react";
 import { dataService } from "../DataService";
 
@@ -8,14 +8,12 @@ export function ListItem({command, onClickDelete}) {
         margin: "10px",
         padding: "10px"
     }
-
+    let nextDate = dateInfo(command.nextTime);
     return (
         <div style={style}>
-            <p>Volgende actie: {dateInfo(command.nextTime)}</p>
-            <p>Actie: {command.action? "Aan":"Uit"}</p>
-            <p>Aantal keer herhalen: {command.amount}</p>
-            <p>Tijd aan: {command.onTime}</p>
-            <p>Tijd uit: {command.offTime}</p>
+            <p>Zet <b>{command.action? "Aan":"Uit"}</b> om <b>{nextDate.time}</b>u op <b>{nextDate.date}</b></p>
+            <p>Aantal keer herhalen: <b>{command.amount}</b></p>
+            <p>Waarbij Tijd aan: <b>{timeFormat(command.onTime)}</b> en Tijd uit: <b>{timeFormat(command.offTime)}</b></p>
             <button onClick={()=>onClickDelete(command.id)}>Delete</button>
         </div>
     )

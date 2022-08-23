@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { dataService } from "../DataService";
-import dateInfo from "./DateInfo";
+import {dateInfo} from "./Util";
 
 export function Status() {
     let style = {
@@ -17,11 +17,12 @@ export function Status() {
         });
     }, []);
 
+    let date = dateInfo(status?.lastUsed)
     return (
         <div style={style}>
             <h2>Status</h2>
-            <p>Pomp staat: {status?.active ? "Aan" : "Uit"}</p>
-            <p>Laatste wijziging: {dateInfo(status?.lastUsed)}</p>
+            <p>Pomp staat: <b>{status?.active ? "Aan" : "Uit"}</b></p>
+            <p>Laatste wijziging: <b>{date.time}</b>u op <b>{date.date}</b></p>
         </div>
     );
 
