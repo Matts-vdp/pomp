@@ -3,18 +3,18 @@ namespace PompServer.Models;
 public interface IPump
 {
     void SetState(bool value);
-    bool GetState();
+    Status GetStatus();
 }
 
 public class Pump : IPump
 {
-    private bool Status = false;
+    private Status Status = new Status();
 
     public void SetState(bool value)
     {
-        Status = value;
+        Status.Active = value;
     }
-    public bool GetState()
+    public Status GetStatus()
     {
         return Status;
     }

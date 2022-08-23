@@ -17,7 +17,7 @@ public class PumpTest
     {
         var pump = new Pump();
         pump.SetState(value);
-        Assert.AreEqual(value, pump.GetState());
+        Assert.AreEqual(value, pump.GetStatus().Active);
     }
 
 }

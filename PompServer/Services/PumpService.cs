@@ -26,7 +26,7 @@ public class PumpService
 		return commandExecutor.Delete(id);
 	}
 
-	public bool GetStatus()
+	public Status GetStatus()
 	{
 		return commandExecutor.GetStatus();
 	}

@@ -111,8 +111,8 @@ public class CommandExecutor
         return task;
     }
 
-    public bool GetStatus()
+    public Status GetStatus()
     {
-        return pump.GetState();
+        return pump.GetStatus();
     }
 }

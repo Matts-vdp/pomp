@@ -27,7 +27,7 @@ public class PumpController : ControllerBase
     }
 
     [HttpGet("Status")]
-    public bool Status()
+    public Status Status()
     {
         return pumpService.GetStatus();
     }
