@@ -1,27 +1,14 @@
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import './App.css';
+import List from './Information/Information';
+import Creator from './Creator';
 
 function NavBar() {
   return (
     <div>
       <a href="/">List</a>
       <a href="creator">Creator</a>
-    </div>
-  );
-}
-
-function List() {
-  return (
-    <div>
-      <h1>List</h1>
-    </div>
-  );
-}
-
-function Creator() {
-  return (
-    <div>
-      <h1>Creator</h1>
     </div>
   );
 }

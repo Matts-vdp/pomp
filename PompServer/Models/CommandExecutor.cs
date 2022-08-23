@@ -73,7 +73,7 @@ public class CommandExecutor
         lock (commands)
         {
             if (commands.Count != 0)
-                return commands.Where((c) => c.Id == id).First();
+                return commands.Where((c) => c.Id == id).FirstOrDefault();
             return null;
         }
     }

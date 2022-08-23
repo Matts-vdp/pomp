@@ -25,8 +25,12 @@ public class PumpService
 	{
 		return commandExecutor.Delete(id);
 	}
+    public void ClearCommands()
+    {
+        commandExecutor.Clear();
+    }
 
-	public Status GetStatus()
+    public Status GetStatus()
 	{
 		return commandExecutor.GetStatus();
 	}

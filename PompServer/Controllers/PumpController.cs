@@ -32,15 +32,23 @@ public class PumpController : ControllerBase
         return pumpService.GetStatus();
     }
 
+    [HttpPost("Clear")]
+    public IActionResult ClearCommands()
+    {
+        pumpService.ClearCommands();
+        return Ok();
+    }
+
     [HttpGet("Commands")]
     public List<RepeatedCommand> Commands()
     {
         return pumpService.GetCommands();
     }
 
-    [HttpDelete("Commands")]
+    [HttpDelete("Commands/{id:Guid}")]
     public IActionResult DeleteCommand(Guid id)
     {
+        _logger.LogInformation("Delete: " + id);
         var completed = pumpService.DeleteCommand(id);
         if (completed)
             return Ok();
