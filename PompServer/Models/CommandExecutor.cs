@@ -40,13 +40,17 @@ public class CommandExecutor
         }
     }
 
-    public void Delete(Guid id)
+    public bool Delete(Guid id)
     {
         lock (commands)
         {
             var command = GetCommand(id);
             if (command != null)
+            {
                 commands.Remove(command);
+                return true;
+            }
+            return false;
         }
     }
 
@@ -105,5 +109,10 @@ public class CommandExecutor
     {
         var task = Task.Run(() =>{ ExecutingLoop(); });
         return task;
+    }
+
+    public bool GetStatus()
+    {
+        return pump.GetState();
     }
 }

@@ -6,13 +6,13 @@ namespace PompServer.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PompController : ControllerBase
+public class PumpController : ControllerBase
 {
-    private readonly ILogger<PompController> _logger;
+    private readonly ILogger<PumpController> _logger;
     private readonly PumpService pumpService;
 
-    public PompController(
-        ILogger<PompController> logger, 
+    public PumpController(
+        ILogger<PumpController> logger, 
         PumpService pumpService
         )
     {
@@ -26,13 +26,28 @@ public class PompController : ControllerBase
         return "Hallo";
     }
 
+    [HttpGet("Status")]
+    public bool Status()
+    {
+        return pumpService.GetStatus();
+    }
+
     [HttpGet("Commands")]
     public List<RepeatedCommand> Commands()
     {
         return pumpService.GetCommands();
     }
 
-    [HttpPost("Commands")]
+    [HttpDelete("Commands")]
+    public IActionResult DeleteCommand(Guid id)
+    {
+        var completed = pumpService.DeleteCommand(id);
+        if (completed)
+            return Ok();
+        return BadRequest();
+    }
+
+    [HttpPost("BasicCommand")]
     public IActionResult AddCommand(bool action)
     {
         var command = new BasicCommand(action);
@@ -44,12 +59,7 @@ public class PompController : ControllerBase
     [HttpPost("RepeatedCommand")]
     public IActionResult AddRepeatedCommand(int offTime, int onTime, int amount)
     {
-        var command = new RepeatedCommand(
-            true,
-            offTime,
-            onTime, 
-            amount
-            );
+        var command = new RepeatedCommand(amount, offTime, onTime);
         _logger.LogInformation("Created: " + command.ToString());
         pumpService.AddCommand(command);
         return Ok();

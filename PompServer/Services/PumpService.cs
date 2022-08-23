@@ -20,4 +20,14 @@ public class PumpService
 	{
 		commandExecutor.AddCommand(command);
 	}
+
+	public bool DeleteCommand(Guid id)
+	{
+		return commandExecutor.Delete(id);
+	}
+
+	public bool GetStatus()
+	{
+		return commandExecutor.GetStatus();
+	}
 }
