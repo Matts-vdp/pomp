@@ -42,15 +42,11 @@ function App() {
   }
 
   function onClickDelete(id) {
-    dataService.deleteCommand(id).then(()=>{
-        getCommands();
-    })
+    dataService.deleteCommand(id).then(()=>{})
   }
 
   function onClickClear() {
-      dataService.clearCommands().then(()=>{
-          getCommands();
-      })
+      dataService.clearCommands().then(()=>{})
   }
 
   function onClickNav(page) {
