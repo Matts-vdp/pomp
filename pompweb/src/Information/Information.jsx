@@ -1,10 +1,14 @@
 import { List } from "./List";
 
-function Information() {
+function Information({commandList, onClickClear, onClickDelete}) {
     return (
       <div>
         <h1>List</h1>
-        <List />
+        <List 
+          commandList={commandList}
+          onClickClear={onClickClear} 
+          onClickDelete={onClickDelete}
+        />
       </div>
     );
 }

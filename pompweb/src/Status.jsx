@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { dataService } from "./DataService";
 import {dateInfo} from "./Util";
 
@@ -15,20 +14,12 @@ function BasicCommandForm() {
     )
 }
 
-export function Status() {
+export function Status({status}) {
     let style = {
         border: "1px solid black",
         margin: "10px",
         padding: "10px"
     };
-    let [status, setStatus] = useState(null);
-
-    useEffect(() => {
-        dataService.getStatus().then((result) => {
-            console.log(result);
-            setStatus(result);
-        });
-    }, []);
 
     let date = dateInfo(status?.lastUsed)
     return (

@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.SignalR;
+using PompServer.Hubs;
 using System;
 
 namespace PompServer.Models;
@@ -10,12 +12,14 @@ public class CommandExecutor
     private IPump pump;
     private ILogger logger;
     private Task? task;
+    private IHubContext<UpdateHub> updateHub;
 
-    public CommandExecutor(IPump pump, ILogger logger)
+    public CommandExecutor(IPump pump, ILogger logger, IHubContext<UpdateHub> updateHub)
     {
         commands = new List<RepeatedCommand>();
         this.pump = pump;
         this.logger = logger;
+        this.updateHub = updateHub;
     }
 
     public void Run(DateTime time)
@@ -32,6 +36,7 @@ public class CommandExecutor
                     pump.SetState(action);
                     if (command.IsDone())
                         finished = command;
+                    _ = updateHub.Clients.All.SendAsync("update", "update");
                     break;
                 }
             }

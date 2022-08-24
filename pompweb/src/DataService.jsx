@@ -1,4 +1,8 @@
-let url = "https://localhost:7256/Pump/"
+import { HubConnectionBuilder } from '@microsoft/signalr';
+let baseUrl = "https://localhost:7256/"
+let url = baseUrl + "Pump/"
+let connection = null
+let started = false
 
 export const dataService = {
     getStatus: async ()=>{
@@ -41,4 +45,25 @@ export const dataService = {
         });
         return response
     },
+
+
+    connectToHub: (func) => {
+        if (connection == null)
+            connection = new HubConnectionBuilder()
+                .withUrl(baseUrl+"updatehub")
+                .build()
+        if (!started) {
+            connection.start().then(()=>{
+                started = true
+                connection.on("update", data => {
+                    func(data);
+                });
+            })
+        }
+        else {
+            connection.on("update", data => {
+                func(data);
+            });
+        }
+    }
 };

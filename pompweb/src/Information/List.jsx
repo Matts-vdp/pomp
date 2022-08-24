@@ -1,6 +1,4 @@
 import {dateInfo, timeFormat} from "../Util";
-import { useEffect, useState } from "react";
-import { dataService } from "../DataService";
 
 export function ListItem({command, onClickDelete}) {
     let style = {
@@ -19,36 +17,11 @@ export function ListItem({command, onClickDelete}) {
     )
 }
 
-export function List() {
-    let [commands, setCommands] = useState(null);
-
-    function getCommands(){
-        dataService.getCommands().then((result) => {
-            console.log(result);
-            setCommands(result);
-        });
-    }
-
-    useEffect(() => {
-        getCommands();
-    }, []);
-
-    function onClickDelete(id) {
-        dataService.deleteCommand(id).then(()=>{
-            getCommands();
-        })
-    }
-
-    function onClickClear() {
-        dataService.clearCommands().then(()=>{
-            getCommands();
-        })
-    }
-
+export function List({commandList, onClickClear, onClickDelete}) {
     return (
         <div>
             <button onClick={onClickClear}>Delete all</button>
-            {commands?.map((value) => <ListItem 
+            {commandList?.map((value) => <ListItem 
                 key={value.id} 
                 command={value} 
                 onClickDelete={onClickDelete}

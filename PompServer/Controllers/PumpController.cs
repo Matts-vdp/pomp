@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PompServer.Hubs;
 using PompServer.Models;
 using PompServer.Services;
 

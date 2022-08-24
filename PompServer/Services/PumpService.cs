@@ -1,4 +1,6 @@
-﻿using PompServer.Models;
+﻿using Microsoft.AspNetCore.SignalR;
+using PompServer.Hubs;
+using PompServer.Models;
 using System;
 
 namespace PompServer.Services;
@@ -6,9 +8,10 @@ namespace PompServer.Services;
 public class PumpService
 {
 	private CommandExecutor commandExecutor;
-	public PumpService(ILogger<PumpService> logger)
+
+	public PumpService(ILogger<PumpService> logger,  IHubContext<UpdateHub> updateHub)
 	{
-		commandExecutor = new CommandExecutor(new Pump(), logger);
+		commandExecutor = new CommandExecutor(new Pump(), logger, updateHub);
 	}
 
 	public List<RepeatedCommand> GetCommands()
