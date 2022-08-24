@@ -1,6 +1,19 @@
 import { useEffect, useState } from "react";
-import { dataService } from "../DataService";
+import { dataService } from "./DataService";
 import {dateInfo} from "./Util";
+
+function BasicCommandForm() {
+    function onClick(action) {
+      dataService.addBasicCommand(action)
+    }
+  
+    return (
+      <div>
+        <button onClick={()=>onClick(true)}>Aan</button>
+        <button onClick={()=>onClick(false)}>Uit</button>
+      </div>
+    )
+}
 
 export function Status() {
     let style = {
@@ -22,7 +35,8 @@ export function Status() {
         <div style={style}>
             <h2>Status</h2>
             <p>Pomp staat: <b>{status?.active ? "Aan" : "Uit"}</b></p>
-            <p>Laatste wijziging: <b>{date.time}</b>u op <b>{date.date}</b></p>
+            <p>Laatste actie: <b>{date.time}</b>u op <b>{date.date}</b></p>
+            <BasicCommandForm />
         </div>
     );
 

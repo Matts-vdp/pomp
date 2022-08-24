@@ -1,4 +1,4 @@
-import {dateInfo, timeFormat} from "./Util";
+import {dateInfo, timeFormat} from "../Util";
 import { useEffect, useState } from "react";
 import { dataService } from "../DataService";
 

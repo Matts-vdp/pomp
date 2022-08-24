@@ -27,7 +27,7 @@ public class CommandExecutor
             {
                 if (command.ShouldExecute(time))
                 {
-                    logger.LogInformation(DateTime.Now + "Executing: " + command.ToString());
+                    logger.LogInformation(DateTime.Now + ">> Executing: " + command.ToString());
                     var action = command.Execute();
                     pump.SetState(action);
                     if (command.IsDone())

@@ -25,5 +25,20 @@ export const dataService = {
             method: "POST"
         });
         return response
-    } 
+    },
+
+    addBasicCommand: async (action) => {
+        let response = await fetch(url + "BasicCommand?action="+action, {
+            method: "POST"
+        });
+        return response
+    },
+
+    addRepeatedCommand: async (offTime, onTime, amount) => {
+        let params = `offTime=${offTime}&onTime=${onTime}&amount=${amount}`
+        let response = await fetch(url + "RepeatedCommand?" + params, {
+            method: "POST"
+        });
+        return response
+    },
 };

@@ -1,28 +1,38 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import './App.css';
 import List from './Information/Information';
 import Creator from './Creator/Creator';
+import { Status } from './Status';
+import { useState } from 'react';
 
-function NavBar() {
+const pages = {
+  info: "info",
+  creator: "creator"
+}
+
+
+function NavBar({onClick}) {
   return (
     <div>
-      <a href="/">List</a>
-      <a href="creator">Creator</a>
+      <button onClick={()=>onClick(pages.info)}>Info</button>
+      <button onClick={()=>onClick(pages.creator)}>Instellen</button>
     </div>
   );
 }
 
+
 function App() {
+  let [page, setPage] = useState(pages.info)
+
+  function onClickNav(page) {
+    setPage(page);
+  }
+
   return (
     <div>
-      <NavBar />
-      <BrowserRouter>
-        <Routes>
-            <Route path="" element={<List />} />
-            <Route path="creator" element={<Creator />} />
-        </Routes>
-      </BrowserRouter>
+      <NavBar onClick={onClickNav}/>
+      <Status />
+      {page===pages.info && <List />}
+      {page===pages.creator && <Creator />}
     </div>
   );
 }
