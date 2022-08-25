@@ -1,0 +1,17 @@
+.navbar {
+    background-color: var(--nav-back);
+    color: var(--nav-text);
+}
+
+.navbar button {
+    background-color: var(--nav-back);
+    color: var(--nav-text);
+    border: 0;
+    padding: 10px;
+    font-size: larger;
+}
+
+.navbar button:active {
+    background-color: var(--nav-hover);
+    color: var(--nav-text);
+}

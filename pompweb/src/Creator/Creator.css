@@ -1,0 +1,28 @@
+.creator {
+    padding-left: 5px;
+}
+.timeField {
+    display: flex;
+}
+.table {
+    display: grid;
+    justify-content: flex-start;
+    grid-template-columns: max-content max-content min-content max-content;
+    row-gap: 5px;
+}
+.timeInput {
+    width: 40px;
+}
+.timeEx {
+    padding-left: 2px;
+}
+
+
+.amountInput {
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+.table p {
+    padding-right: 5px;
+    padding-bottom: 5px;
+}

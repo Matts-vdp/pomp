@@ -7,13 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Iot.Device.Bindings" Version="2.1.0" />
-    <PackageReference Include="NSubstitute" Version="4.4.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <Compile Remove="Hubs\Clients\**" />
+    <Content Remove="Hubs\Clients\**" />
+    <EmbeddedResource Remove="Hubs\Clients\**" />
+    <None Remove="Hubs\Clients\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Hubs\Clients\" />
+    <PackageReference Include="Iot.Device.Bindings" Version="2.1.0" />
+    <PackageReference Include="NSubstitute" Version="4.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
 </Project>

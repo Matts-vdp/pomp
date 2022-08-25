@@ -5,7 +5,7 @@ function pad(num) {
 export function dateInfo(date) {
     let time = new Date(date)
     let timeStr = `${pad(time.getHours())}:${pad(time.getMinutes())}:${pad(time.getSeconds())}`
-    let dateStr = `${pad(time.getDay())}/${pad(time.getMonth())}/${pad(time.getFullYear())}`
+    let dateStr = `${pad(time.getDate())}/${pad(time.getMonth())}/${pad(time.getFullYear())}`
     return {
         time: timeStr,
         date: dateStr
@@ -17,4 +17,16 @@ export function timeFormat(time) {
     let seconds = time- minutes*60;
     
     return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}min`
+}
+
+export function timeUntil(dateString) {
+    let date = new Date(dateString)
+    let now = Date.now()
+    let until = date.getTime() - now;
+    let hours = Math.floor(until / (3600*1000));
+    until -= hours * (3600*1000)
+    let minutes = Math.floor(until/(60*1000))
+    until -= minutes * (60*1000)
+    let seconds = Math.floor(until/(1000))
+    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 }

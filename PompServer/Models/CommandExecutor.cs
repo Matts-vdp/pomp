@@ -22,6 +22,11 @@ public class CommandExecutor
         this.updateHub = updateHub;
     }
 
+    private void Notify()
+    {
+        _ = updateHub.Clients.All.SendAsync("update", "update");
+    }
+
     public void Run(DateTime time)
     {
         lock (commands)
@@ -36,7 +41,7 @@ public class CommandExecutor
                     pump.SetState(action);
                     if (command.IsDone())
                         finished = command;
-                    _ = updateHub.Clients.All.SendAsync("update", "update");
+                    Notify();
                     break;
                 }
             }
@@ -53,6 +58,7 @@ public class CommandExecutor
             if (command != null)
             {
                 commands.Remove(command);
+                Notify();
                 return true;
             }
             return false;
@@ -62,6 +68,7 @@ public class CommandExecutor
     public void AddCommand(RepeatedCommand command)
     {
         Add(command);
+        Notify();
         if (task == null || task.IsCompleted)
             task = StartTask();
     }

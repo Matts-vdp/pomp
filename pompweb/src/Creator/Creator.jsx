@@ -1,5 +1,23 @@
 import { useState } from "react";
 import { dataService } from "../DataService";
+import './Creator.css'
+
+function InputField({name, value, handleChange}) {
+  return (
+    <div >
+      <input 
+        className="timeInput"
+        type="number" 
+        name={name} 
+        id={name}
+        min="0"
+        max="60"
+        value={value} 
+        onChange={handleChange}
+      />
+    </div>
+  )
+}
 
 function RepeatedCommandForm() {
   let [state, setState] = useState({
@@ -34,47 +52,34 @@ function RepeatedCommandForm() {
   }
 
   return (
-    <div>
-      <label htmlFor="onTime">Tijd aan </label>
+    <div className="table">
+      <p>Tijd aan</p>
+      <div className="timeField">
+        <InputField name={"onTime"} value={state.onTime} handleChange={handleChange}/>
+        <p className="timeEx">min</p>
+      </div>
+      :
+      <div className="timeField">
+        <InputField name={"onTimeSec"} value={state.onTimeSec} handleChange={handleChange}/> 
+        <p className="timeEx">sec</p>
+      </div>
+      
+
+      <p>Tijd uit</p>
+      <div className="timeField">
+        <InputField name={"offTime"} value={state.offTime} handleChange={handleChange}/>
+        <p className="timeEx">min</p>
+      </div>
+      :
+      <div className="timeField">
+        <InputField name={"offTimeSec"} value={state.offTimeSec} handleChange={handleChange}/> 
+        <p className="timeEx">sec</p>
+      </div>
+
+
+      <p className="formHead">Keer herhalen </p>
       <input 
-        type="number" 
-        name="onTime" 
-        id="onTime" 
-        min="0"
-        value={state.onTime} 
-        onChange={handleChange}
-      />:
-      <input 
-        type="number" 
-        name="onTimeSec" 
-        id="onTimeSec" 
-        min="0"
-        max="60"
-        value={state.onTimeSec} 
-        onChange={handleChange}
-      />
-      <br />
-      <label htmlFor="offTime">Tijd uit </label>
-      <input 
-        type="number" 
-        name="offTime" 
-        id="offTime" 
-        min="0"
-        value={state.offTime} 
-        onChange={handleChange}
-      />:
-      <input 
-        type="number" 
-        name="offTimeSec" 
-        id="offTimeSec" 
-        min="0"
-        max="60"
-        value={state.offTimeSec} 
-        onChange={handleChange}
-      />
-      <br />
-      <label htmlFor="amount">Aantal keer herhalen </label>
-      <input 
+        className="amountInput"
         type="number" 
         name="amount" 
         id="amount" 
@@ -82,17 +87,15 @@ function RepeatedCommandForm() {
         value={state.amount} 
         onChange={handleChange}
       />
-      <br />
-      <button onClick={onClick}>Stel in</button>
+      <button className="button on" onClick={onClick}>Stel in</button>
     </div>
   )
 }
 
-
 function Creator() {
     return (
-      <div>
-        <h1>Creator</h1>
+      <div className="creator">
+        <h1>Stel in</h1>
         <RepeatedCommandForm />
       </div>
     );

@@ -1,0 +1,64 @@
+:root {
+    --nav-back: #29434e;
+    --nav-text: #eceff1;
+    --nav-hover: #819ca9;
+    --button-on: #8bc34a;
+    --button-off: #ef5350;
+    --background: #b0bec5;
+    --back-accent: #546e7a;
+    --text-accent: #eceff1; 
+    --list-back: white;
+    --text: black;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    background-color: var(--background);
+    font-family: sans-serif;
+}
+h2 {
+    margin: 0;
+}
+
+.body {
+    margin: 10px;
+}
+
+.button {
+    border: 2px solid black;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+
+.on {
+    border-color: var(--button-on);
+    color: var(--text);
+    background-color: var(--button-on);
+
+}
+.off {
+    border-color: var(--button-off);
+    color: var(--text);
+    background-color: var(--button-off);
+}
+.off-border {
+    border-color: var(--button-off);
+    color: var(--text);
+    background-color: rgba(0, 0, 0, 0);
+}
+.off-border:active {
+    background-color: var(--button-off);
+}
+.on-border {
+    border-color: var(--button-on);
+    color: var(--text);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
