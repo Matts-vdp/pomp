@@ -95,7 +95,7 @@ function RepeatedCommandForm() {
 function Creator() {
     return (
       <div className="creator">
-        <h1>Stel in</h1>
+        <h2>Stel in</h2>
         <RepeatedCommandForm />
       </div>
     );

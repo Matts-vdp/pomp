@@ -11,14 +11,12 @@ export function Body({ page }) {
 
   function getCommands() {
     dataService.getCommands().then((result) => {
-      console.log(result);
       setCommands(result);
     });
   }
 
   function getStatus() {
     dataService.getStatus().then((result) => {
-      console.log(result);
       setStatus(result);
     });
   }
@@ -35,7 +33,6 @@ export function Body({ page }) {
     getCommands();
     getStatus();
     dataService.connectToHub((data) => {
-      console.log(data);
       getCommands();
       getStatus();
     });
