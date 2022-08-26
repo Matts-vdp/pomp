@@ -37,10 +37,10 @@ public class RepeatedCommand
         OffTime = offTime;
         OnTime = onTime;
         NextTime = DateTime.Now;
-        calcEndTime();
+        CalcEndTime();
     }
 
-    private void calcEndTime()
+    private void CalcEndTime()
     {
         var time = NextTime;
         for (int a = Amount; a > 0; a--)
