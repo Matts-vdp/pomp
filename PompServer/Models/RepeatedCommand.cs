@@ -10,6 +10,20 @@ public class RepeatedCommand
     public int OffTime { get; set; }
     public int OnTime { get; set; }
     public DateTime NextTime { get; set; } = DateTime.MinValue;
+    public DateTime EndTime { 
+        get 
+        {
+            var time = NextTime;
+            for (int a = Amount; a>0; a--)
+            {
+                time += TimeSpan.FromSeconds(OnTime);
+                time += TimeSpan.FromSeconds(OffTime);
+            }
+            time -= TimeSpan.FromSeconds(OffTime);
+            return time;
+        } 
+    }
+
 
     public RepeatedCommand(
         int amount = 1,

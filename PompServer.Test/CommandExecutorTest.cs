@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
 using NUnit.Framework;
+using PompServer.Hubs;
 using PompServer.Models;
 using System;
 using System.Collections.Generic;
@@ -14,15 +16,18 @@ public class CommandExecutorTest
 {
     private CommandExecutor commandExecutor;
     private IPump pump;
+    private IHubContext<UpdateHub> hub;
 
     [SetUp]
     public void Setup()
     {
         pump = Substitute.For<IPump>();
+        hub = Substitute.For<IHubContext<UpdateHub>>();
 
         commandExecutor = new CommandExecutor(
-            pump, 
-            Substitute.For<ILogger>()
+            pump,
+            Substitute.For<ILogger>(),
+            hub
         );
     }
 

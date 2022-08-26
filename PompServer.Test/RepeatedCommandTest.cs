@@ -12,7 +12,7 @@ namespace PompServer.Test
     public class RepeatedCommandTest
     {
         [Test]
-        public void RepeatedCommandShouldExecuteTest()
+        public void ShouldExecuteTest()
         {
             var offTime = 1;
             var onTime = 1;
@@ -28,7 +28,7 @@ namespace PompServer.Test
         }
 
         [Test]
-        public void RepeatedCommandExecuteOnceTest()
+        public void ExecuteOnceTest()
         {
             var offTime = 1;
             var onTime = 1;
@@ -46,7 +46,7 @@ namespace PompServer.Test
         }
 
         [Test]
-        public void RepeatedCommandExecuteMoreTest()
+        public void ExecuteMoreTest()
         {
             var offTime = 1;
             var onTime = 1;
@@ -69,6 +69,19 @@ namespace PompServer.Test
             var result4 = command.Execute();
             Assert.AreEqual(false, result4);
             Assert.AreEqual(true, command.IsDone());
+        }
+
+        [TestCase(2, 1, 2, (2 + 1 + 2))]
+        [TestCase(2, 1, 1, (2))]
+        [TestCase(2, 1, 3, (2 + 1 + 2 + 1 + 2))]
+        public void EndTimeCorrectTest(int onTime, int offTime, int amount, int totalSeconds)
+        {
+            var command = new RepeatedCommand(amount, offTime, onTime);
+            var Correct = command.NextTime + TimeSpan.FromSeconds(totalSeconds);
+
+            var result = command.EndTime;
+
+            Assert.AreEqual(Correct, result);
         }
     }
 }
