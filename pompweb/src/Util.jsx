@@ -1,11 +1,11 @@
-function pad(num) {
+export function pad(num) {
     return String(num).padStart(2, '0')
 }
 
 export function dateInfo(date) {
     let time = new Date(date)
     let timeStr = `${pad(time.getHours())}:${pad(time.getMinutes())}:${pad(time.getSeconds())}`
-    let dateStr = `${pad(time.getDate())}/${pad(time.getMonth())}/${pad(time.getFullYear())}`
+    let dateStr = `${pad(time.getDate())}/${pad(time.getMonth()+1)}/${pad(time.getFullYear())}`
     return {
         time: timeStr,
         date: dateStr

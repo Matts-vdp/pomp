@@ -12,17 +12,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<PumpService>();
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("corsapp",
-//        policy =>
-//        {
-//        policy.AllowAnyHeader()
-//        .AllowAnyMethod()
-//        .WithOrigins(new string[] { "http://localhost:5000" , "http://localhost:3000" })
-//            .AllowCredentials();
-//        });
-//});
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corsapp",
+        policy =>
+        {
+            policy.AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins(new string[] { "http://localhost:5000", "http://localhost:3000" })
+                .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 
@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 //app.UseHttpsRedirection();
-//app.UseCors("corsapp");
+app.UseCors("corsapp");
 app.UseAuthorization();
 app.MapControllers();
 app.MapHub<UpdateHub>("/updatehub");

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { dataService } from "../DataService";
+import { pad } from "../Util";
 import './Creator.css'
 
 function InputField({name, value, handleChange}) {
@@ -20,16 +21,21 @@ function InputField({name, value, handleChange}) {
 }
 
 function RepeatedCommandForm() {
+  let date = new Date(Date.now())
+  console.log(`${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`)
   let [state, setState] = useState({
     offTime: 0,
     offTimeSec: 0,
     onTime: 0, 
     onTimeSec: 0, 
-    amount: 1
+    amount: 1,
+    startTime: "",
+    startDate: `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`,
   })
 
   function handleChange(event) {
     setState((prev)=>{
+      console.log(event.target.value)
       return {...prev, [event.target.name]:event.target.value }
     })
   }
@@ -47,7 +53,9 @@ function RepeatedCommandForm() {
     dataService.addRepeatedCommand(
       state.offTime*60+state.offTimeSec,
       state.onTime*60+state.onTimeSec,
-      state.amount
+      state.amount,
+      state.startTime,
+      state.startDate
     )
   }
 
@@ -87,6 +95,26 @@ function RepeatedCommandForm() {
         value={state.amount} 
         onChange={handleChange}
       />
+
+      <p className="formHead">Start tijd</p>
+      <input 
+        className="amountInput"
+        type="time" 
+        name="startTime" 
+        id="startTime" 
+        value={state.startTime} 
+        onChange={handleChange}
+      />
+      <p className="formHead">Start datum</p>
+      <input 
+        className="amountInput"
+        type="date" 
+        name="startDate" 
+        id="startDate" 
+        value={state.startDate} 
+        onChange={handleChange}
+      />
+
       <button className="button on" onClick={onClick}>Stel in</button>
     </div>
   )

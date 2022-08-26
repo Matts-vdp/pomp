@@ -14,7 +14,7 @@ public class Pump : IPump
 
     private readonly GpioController? controller;
 
-    private const int PIN = 18;
+    private const int PIN = 5;
 
     public Pump()
     {
