@@ -23,6 +23,7 @@ export function timeUntil(dateString) {
     let date = new Date(dateString)
     let now = Date.now()
     let until = date.getTime() - now;
+    if (until < 0) until = 0;
     let hours = Math.floor(until / (3600*1000));
     until -= hours * (3600*1000)
     let minutes = Math.floor(until/(60*1000))

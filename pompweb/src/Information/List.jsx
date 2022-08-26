@@ -5,7 +5,7 @@ import './List.css'
 
 
 export function ListItem({command, onClickDelete}) {
-    let nextDate = dateInfo(command.nextTime);
+    let endDate = dateInfo(command.endTime);
     let [until, setUntil] = useState("");
     useEffect(()=>{
         setUntil(timeUntil(command.nextTime))
@@ -24,7 +24,7 @@ export function ListItem({command, onClickDelete}) {
         <div className="listItem">
             <p></p>
             <p>Zet <b style={color}>{command.action? "Aan":"Uit"}</b> binnen <b>{until}</b>u </p>
-            <p>Om <b>{nextDate.time}</b>u op <b>{nextDate.date}</b></p>
+            <p>Klaar om <b>{endDate.time}</b>u op <b>{endDate.date}</b></p>
             <p>Aantal keer herhalen: <b>{command.amount}</b></p>
             <div className="time">
                 <div className="timeTable">
