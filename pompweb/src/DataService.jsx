@@ -38,8 +38,12 @@ export const dataService = {
         return response
     },
 
-    addRepeatedCommand: async (offTime, onTime, amount) => {
+    addRepeatedCommand: async (offTime, onTime, amount, startTime, startDate) => {
         let params = `offTime=${offTime}&onTime=${onTime}&amount=${amount}`
+        if (startTime !== "" && startDate !== "") {
+            let time = startTime + ";" + startDate
+            params += `&startTime=${time}`
+        }
         let response = await fetch(url + "RepeatedCommand?" + params, {
             method: "POST"
         });

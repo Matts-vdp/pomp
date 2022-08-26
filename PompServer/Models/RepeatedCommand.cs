@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace PompServer.Models;
 
 public class RepeatedCommand
@@ -22,7 +24,16 @@ public class RepeatedCommand
         int offTime = 0,
         int onTime = 0
         ) : this(true, amount, offTime, onTime) { }
-
+    public RepeatedCommand(
+        int amount = 1,
+        int offTime = 0,
+        int onTime = 0,
+        string? startTime = null
+        ) : this(true, amount, offTime, onTime) 
+    {
+        NextTime = parseTime(startTime);
+        calcEndTime();
+    }
 
     public RepeatedCommand(
         bool action = true,
@@ -38,6 +49,16 @@ public class RepeatedCommand
         OnTime = onTime;
         NextTime = DateTime.Now;
         calcEndTime();
+    }
+
+    private DateTime parseTime(string? time)
+    {
+        if (time == null) return DateTime.Now;
+        var dateTime = new DateTime();
+        const string pattern = "H:m;yyyy-M-d";
+        var succes = DateTime.TryParseExact(time, pattern, null, DateTimeStyles.None, out dateTime);
+        if (!succes) return DateTime.Now;
+        return dateTime;
     }
 
     private void calcEndTime()
@@ -58,6 +79,7 @@ public class RepeatedCommand
     }
     public virtual bool Execute()
     {
+        NextTime = DateTime.Now;
         if (Action) // als eerste keer 
         {
             NextTime += TimeSpan.FromSeconds(OnTime);

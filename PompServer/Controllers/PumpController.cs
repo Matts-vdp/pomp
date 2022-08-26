@@ -66,9 +66,9 @@ public class PumpController : ControllerBase
     }
 
     [HttpPost("RepeatedCommand")]
-    public IActionResult AddRepeatedCommand(int offTime, int onTime, int amount)
+    public IActionResult AddRepeatedCommand(int offTime, int onTime, int amount, string? startTime)
     {
-        var command = new RepeatedCommand(amount, offTime, onTime);
+        var command = new RepeatedCommand(amount, offTime, onTime, startTime);
         _logger.LogInformation("Created: " + command.ToString());
         pumpService.AddCommand(command);
         return Ok();
