@@ -10,18 +10,10 @@ public class RepeatedCommand
     public int OffTime { get; set; }
     public int OnTime { get; set; }
     public DateTime NextTime { get; set; } = DateTime.MinValue;
+    private DateTime _EndTime;
     public DateTime EndTime { 
-        get 
-        {
-            var time = NextTime;
-            for (int a = Amount; a>0; a--)
-            {
-                time += TimeSpan.FromSeconds(OnTime);
-                time += TimeSpan.FromSeconds(OffTime);
-            }
-            time -= TimeSpan.FromSeconds(OffTime);
-            return time;
-        } 
+        get { return _EndTime; } 
+        private set { _EndTime = value; }
     }
 
 
@@ -45,6 +37,19 @@ public class RepeatedCommand
         OffTime = offTime;
         OnTime = onTime;
         NextTime = DateTime.Now;
+        calcEndTime();
+    }
+
+    private void calcEndTime()
+    {
+        var time = NextTime;
+        for (int a = Amount; a > 0; a--)
+        {
+            time += TimeSpan.FromSeconds(OnTime);
+            time += TimeSpan.FromSeconds(OffTime);
+        }
+        time -= TimeSpan.FromSeconds(OffTime);
+        EndTime = time;
     }
 
     public virtual bool ShouldExecute(DateTime time)
