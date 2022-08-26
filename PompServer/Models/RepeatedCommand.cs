@@ -32,7 +32,7 @@ public class RepeatedCommand
         ) : this(true, amount, offTime, onTime) 
     {
         NextTime = parseTime(startTime);
-        calcEndTime();
+        CalcEndTime();
     }
 
     public RepeatedCommand(
@@ -51,9 +51,6 @@ public class RepeatedCommand
         CalcEndTime();
     }
 
-<<<<<<< HEAD
-    private void CalcEndTime()
-=======
     private DateTime parseTime(string? time)
     {
         if (time == null) return DateTime.Now;
@@ -64,8 +61,7 @@ public class RepeatedCommand
         return dateTime;
     }
 
-    private void calcEndTime()
->>>>>>> starttime
+    private void CalcEndTime()
     {
         var time = NextTime;
         for (int a = Amount; a > 0; a--)
