@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavBar } from './NavBar/NavBar';
 import { Body } from './Body';
 
@@ -12,6 +12,7 @@ export const pages = {
 function App() {
   let [page, setPage] = useState(pages.info)
 
+  useEffect(()=>{document.title = "Pomp"},[])
   function onClickNav(page) {
     setPage(page);
   }
