@@ -19,7 +19,7 @@ function App() {
   return (
     <div>
       <NavBar onClick={onClickNav}/>
-      <Body page={page} />
+      <Body page={page} onClickNav={onClickNav}/>
     </div>
   );
 }

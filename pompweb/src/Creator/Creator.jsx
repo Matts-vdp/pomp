@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { pages } from "../App";
 import { dataService } from "../DataService";
 import { pad } from "../Util";
 import './Creator.css'
@@ -20,7 +21,7 @@ function InputField({name, value, handleChange}) {
   )
 }
 
-function RepeatedCommandForm() {
+function RepeatedCommandForm({onClickNav}) {
   let date = new Date(Date.now())
   console.log(`${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`)
   let [state, setState] = useState({
@@ -57,6 +58,7 @@ function RepeatedCommandForm() {
       state.startTime,
       state.startDate
     )
+    onClickNav(pages.info)
   }
 
   return (
@@ -120,11 +122,11 @@ function RepeatedCommandForm() {
   )
 }
 
-function Creator() {
+function Creator({onClickNav}) {
     return (
       <div className="creator">
         <h2>Stel in</h2>
-        <RepeatedCommandForm />
+        <RepeatedCommandForm onClickNav={onClickNav}/>
       </div>
     );
 }

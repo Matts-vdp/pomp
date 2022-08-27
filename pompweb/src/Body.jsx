@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { dataService } from './DataService';
 import { pages } from './App';
 
-export function Body({ page }) {
+export function Body({ page, onClickNav }) {
   let [status, setStatus] = useState(null);
   let [commands, setCommands] = useState(null);
 
@@ -45,7 +45,7 @@ export function Body({ page }) {
         commandList={commands}
         onClickClear={onClickClear}
         onClickDelete={onClickDelete} />}
-      {page === pages.creator && <Creator />}
+      {page === pages.creator && <Creator onClickNav={onClickNav}/>}
     </div>
   );
 }
