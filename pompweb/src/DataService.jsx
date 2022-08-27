@@ -1,5 +1,6 @@
 import { HubConnectionBuilder } from '@microsoft/signalr';
 let baseUrl = "/"
+// let baseUrl = "http://localhost:5000/"
 let url = baseUrl + "Pump/"
 let connection = null
 let started = false
