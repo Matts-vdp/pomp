@@ -41,6 +41,7 @@ export const dataService = {
 
     addRepeatedCommand: async (offTime, onTime, amount, startTime, startDate) => {
         let params = `offTime=${offTime}&onTime=${onTime}&amount=${amount}`
+        console.log(params)
         if (startTime !== "" && startDate !== "") {
             let time = startTime + ";" + startDate
             params += `&startTime=${time}`

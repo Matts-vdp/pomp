@@ -52,8 +52,8 @@ function RepeatedCommandForm({onClickNav}) {
   function onClick() {
     if (!validate(state)) return;
     dataService.addRepeatedCommand(
-      state.offTime*60+state.offTimeSec,
-      state.onTime*60+state.onTimeSec,
+      parseInt(state.offTime)*60 + parseInt(state.offTimeSec),
+      parseInt(state.onTime)*60 + parseInt(state.onTimeSec),
       state.amount,
       state.startTime,
       state.startDate
